@@ -82,7 +82,7 @@ int64_t Reader::getFramePosition(int frameno) {
 }
 
 void save_frame(AVFrame *p_frame, int width, int height, std::string output_filename) {
-	FILE *p_file; 
+	FILE *p_file;
 	p_file = fopen(output_filename.c_str(), "wb");
 	if(p_file == NULL) return;
 	fprintf(p_file, "P6\n%d %d\n255\n", width, height);
@@ -111,7 +111,7 @@ int main(int argc, char **argv) {
         std::regex_search(stream_filename, resolution_sm, resolution_re);
         std::string resolution = resolution_sm[1];
         bool every_other_frame = false;
-        if(resolution == "144") every_other_frame = true;
+        if(resolution == "110") every_other_frame = true;
 
 		for( int i = 0; ; i++ ) {
 			std::unique_ptr<Frame> bmp_orig = orig.read();
@@ -120,7 +120,7 @@ int main(int argc, char **argv) {
 			if(every_other_frame) {
 				std::unique_ptr<Frame> extra_frame = orig.read();
 			}
-			
+
 			std::unique_ptr<Bitmap> bmp3 = nullptr;
 			Bitmap *bmp2;
 
@@ -137,13 +137,13 @@ int main(int argc, char **argv) {
 			}
 
 			double ssim = bmp_orig->SSIM(*bmp2);
-			
+
 			printf( "%i %.06f %s %i %li\n",
 				i,
 				ssim,
 				bmp_transformed->getTypeStr(),
 				bmp_transformed->getCodedPictureNumber(),
-				transformed.getFramePosition(bmp_transformed->getCodedPictureNumber()) );	
+				transformed.getFramePosition(bmp_transformed->getCodedPictureNumber()) );
 			std::cout.flush();
 		}
 
@@ -160,4 +160,3 @@ int main(int argc, char **argv) {
 
 	return 0;
 }
-

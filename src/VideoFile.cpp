@@ -9,8 +9,8 @@ VideoFile::VideoFile(const char *filename) {
 		throw LibavError(error);
 	}
 
-	vstream = -1; 
-	for( int i = 0; i < ctx->nb_streams; i++ ) {
+	vstream = -1;
+	for( unsigned int i = 0; i < ctx->nb_streams; i++ ) {
 		if( ctx->streams[i]->codec->codec_id == AV_CODEC_ID_H264 ) {
 			vstream = i;
 			break;
@@ -49,4 +49,3 @@ std::unique_ptr<RawFrame> VideoFile::fetchRawFrame() {
 
 	return frame;
 }
-

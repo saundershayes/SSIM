@@ -19,7 +19,11 @@
 
 *.a
 *.o
+.deps/*
 .deps
 Makefile
 Makefile.in
 compile
+/src/Makefile
+/src/Makefile.in
+/src/ssim
