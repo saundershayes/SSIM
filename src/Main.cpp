@@ -110,16 +110,10 @@ int main(int argc, char **argv) {
         std::smatch resolution_sm;
         std::regex_search(stream_filename, resolution_sm, resolution_re);
         std::string resolution = resolution_sm[1];
-        bool every_other_frame = false;
-        if(resolution == "110") every_other_frame = true;
 
 		for( int i = 0; ; i++ ) {
 			std::unique_ptr<Frame> bmp_orig = orig.read();
 			std::unique_ptr<Frame> bmp_transformed = transformed.read();
-
-			if(every_other_frame) {
-				std::unique_ptr<Frame> extra_frame = orig.read();
-			}
 
 			std::unique_ptr<Bitmap> bmp3 = nullptr;
 			Bitmap *bmp2;
